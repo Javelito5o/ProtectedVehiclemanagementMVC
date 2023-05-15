@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProtectiveVehiclemanagementMVC.Models;
+using ProtectedVehiclemanagementMVC.Models;
 using System.Diagnostics;
 
-namespace ProtectiveVehiclemanagementMVC.Controllers
+namespace ProtectedVehiclemanagementMVC.Controllers
 {
     public class HomeController : Controller
     {
@@ -20,6 +20,10 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
 
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult About(){
             return View();
         }
 

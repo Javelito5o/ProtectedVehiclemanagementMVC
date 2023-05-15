@@ -1,4 +1,4 @@
-namespace ProtectiveVehiclemanagementMVC.Models
+namespace ProtectedVehiclemanagementMVC.Models
 {
     public class ErrorViewModel
     {
