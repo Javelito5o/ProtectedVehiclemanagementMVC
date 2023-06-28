@@ -1,0 +1,71 @@
+@model IEnumerable<ProtectiveVehiclemanagementMVC.Data.Vehicle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentMilage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextServ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentMilage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextServ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VehicleNum">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VehicleNum">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VehicleNum">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

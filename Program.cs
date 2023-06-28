@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using ProtectiveVehiclemanagementMVC.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var conn = builder.Configuration.GetConnectionString("PMVSDbConnection");
+builder.Services.AddDbContext<PmvsdbContext>(q =>q.UseSqlServer(conn));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
