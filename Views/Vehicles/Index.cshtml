@@ -4,14 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Vehicles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-plus fa-beat"></i> Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleNum)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.VehicleType)
             </th>
@@ -40,6 +43,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <div class="panel panel-default">
+                    <div class="panel-body">6 JDF @Html.DisplayFor(modelItem => item.VehicleNum)</div>
+                </div>  
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.VehicleType)
             </td>
             <td>
@@ -61,11 +69,47 @@
                 @Html.DisplayFor(modelItem => item.VehicleStatus)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.VehicleNum">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VehicleNum">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VehicleNum">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.VehicleNum" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a> 
+                <a asp-action="Details" asp-route-id="@item.VehicleNum" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a> 
+                <!--<a asp-action="Delete" asp-route-id="@item.VehicleNum" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>-->
+                <button data-id="@item.VehicleNum" class="btn btn-danger deleteBtn" type="button"><i class="fa-solid fa-trash-can"></i></button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<form asp-action="Delete" id="vehicleDeleteForm">
+    <input type="hidden" id="VehicleNum" name="Id"/>
+</form>
+
+@section Scripts{
+    <script>
+        $(function(){
+            $('.table').DataTable();
+            $('.deleteBtn').click(function(e){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                        'Deleted!',
+                        'Your record has been deleted.',
+                        'success'
+                        )
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#VehicleNum').val(id);
+                        $('#vehicleDeleteForm').submit();
+                    }
+                    })
+            })
+        })
+    </script>
+}

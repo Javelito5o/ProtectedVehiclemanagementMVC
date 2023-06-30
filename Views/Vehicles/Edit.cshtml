@@ -4,58 +4,80 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Vehicle</h1>
 
-<h4>Vehicle</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="VehicleNum" />
             <div class="form-group">
+                <div class="panel panel-default">
+                    <label asp-for="VehicleNum" class="control-label"></label>
+                    <div class="panel-body">6 JDF @Html.DisplayFor(model => model.VehicleNum)</div>
+                    <span asp-validation-for="VehicleNum" class="text-danger"></span>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
                 <label asp-for="VehicleType" class="control-label"></label>
                 <input asp-for="VehicleType" class="form-control" />
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="DateAdded" class="control-label"></label>
                 <input asp-for="DateAdded" class="form-control" />
                 <span asp-validation-for="DateAdded" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="CurrentMilage" class="control-label"></label>
                 <input asp-for="CurrentMilage" class="form-control" />
                 <span asp-validation-for="CurrentMilage" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="CurrentHours" class="control-label"></label>
                 <input asp-for="CurrentHours" class="form-control" />
                 <span asp-validation-for="CurrentHours" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="PreviousHours" class="control-label"></label>
-                <input asp-for="PreviousHours" class="form-control" />
+                <input asp-for="PreviousHours" class="form-control" id="PreviousHours" onkeyup="service()"/>
                 <span asp-validation-for="PreviousHours" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="NextServ" class="control-label"></label>
-                <input asp-for="NextServ" class="form-control" />
+                <input asp-for="NextServ" class="form-control" id="NextServ" readonly/>
                 <span asp-validation-for="NextServ" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="VehicleStatus" class="control-label"></label>
-                <input asp-for="VehicleStatus" class="form-control" />
+                <!--<input asp-for="VehicleStatus" class="form-control">-->
+                <select asp-for="VehicleStatus"  class="form-control">
+                    <option>Serviceable</option>
+                    <option>VOR</option>
+                    <option>Servicing</option>
+                </select>
                 <span asp-validation-for="VehicleStatus" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-dark">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<script>
+    function service(){
+        var PreviousHours = document.getElementById('PreviousHours').value;
+        document.getElementById('NextServ').value = parseFloat(PreviousHours) + 500;
+    }
+</script>
