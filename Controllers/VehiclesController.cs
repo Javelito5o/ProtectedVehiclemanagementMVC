@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,10 +15,13 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
     public class VehiclesController : Controller
     {
         private readonly PmvsdbContext _context;
+        private readonly INotyfService _notyfService;
 
-        public VehiclesController(PmvsdbContext context)
+        public VehiclesController(PmvsdbContext context, 
+        INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Vehicles
@@ -62,6 +66,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(vehicle);
+                _notyfService.Success($"Vehicle Successfully Added");
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -102,6 +107,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
                 try
                 {
                     _context.Update(vehicle);
+                    _notyfService.Information($"Vehicle Updated Successfully");
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -151,6 +157,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
             if (vehicle != null)
             {
                 _context.Vehicles.Remove(vehicle);
+                _notyfService.Warning($"Vehicle Removed");
             }
             
             await _context.SaveChangesAsync();

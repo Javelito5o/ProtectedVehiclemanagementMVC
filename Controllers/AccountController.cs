@@ -26,9 +26,9 @@ public class AccountController : Controller
     {
         return View(new UserProfileVM
         {
-            Name = User.Identity.Name,
-            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
-            ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
+            Name = User.Identity?.Name,
+            EmailAddress = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+            ProfileImage = User?.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
         });
     }
 
