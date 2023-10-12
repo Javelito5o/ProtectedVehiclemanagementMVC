@@ -50,6 +50,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
             return View(vehicle);
         }
 
+        [Authorize]
         // GET: Vehicles/Create
         public IActionResult Create()
         {
@@ -93,6 +94,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
         // POST: Vehicles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("VehicleNum,VehicleType,DateAdded,CurrentMilage,CurrentHours,PreviousHours,NextServ,VehicleStatus")] Vehicle vehicle)
@@ -127,6 +129,7 @@ namespace ProtectiveVehiclemanagementMVC.Controllers
         }
 
         // GET: Vehicles/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Vehicles == null)

@@ -15,6 +15,7 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
     options.ClientId = builder.Configuration["Auth0:ClientId"];
 });
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddNotyf(c => {
     c.DurationInSeconds = 5;
     c.IsDismissable = true;
@@ -37,6 +38,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseNotyf();
 app.MapControllerRoute(
     name: "default",
